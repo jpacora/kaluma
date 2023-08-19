@@ -35,6 +35,7 @@
 
 #include "dhcpserver.h"
 
+// #define ENABLE_CLIENT_DNS 1
 
 #define MAX_GPIO_NUM 2
 #define SCAN_TIMEOUT 2000     /* 2 sec */
@@ -395,7 +396,7 @@ JERRYXX_FUN(pico_cyw43_wifi_connect) {
   jerry_release_value(ssid);
   jerry_release_value(pw);
   int connect_ret = cyw43_arch_wifi_connect_timeout_ms(
-      (char *)__cyw43_drv.current_ssid, (char *)pw_str, -1, CONNECT_TIMEOUT);
+      (char *)__cyw43_drv.current_ssid, (char *)pw_str, CYW43_AUTH_WPA2_AES_PSK, CONNECT_TIMEOUT);
   if (pw_str) {
     free(pw_str);
   }
